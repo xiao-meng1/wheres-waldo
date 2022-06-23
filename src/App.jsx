@@ -7,11 +7,14 @@ import styles from './styles/app.module.css';
 
 function App() {
   const [page, setPage] = useState('Home');
+  const changePage = (newPage) => {
+    setPage(newPage);
+  };
   const renderContent = () => {
     let content;
 
     if (page === 'Home') {
-      content = <Home />;
+      content = <Home changePage={changePage} />;
     } else if (page === 'Play') {
       content = <Play />;
     } else if (page === 'Leaderboard') {
@@ -21,9 +24,6 @@ function App() {
     }
 
     return content;
-  };
-  const changePage = (newPage) => {
-    setPage(newPage);
   };
 
   return (
