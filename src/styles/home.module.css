@@ -42,4 +42,7 @@
 
 .container > article > p {
   font-size: 20px;
+  line-height: 150%;
+  margin-top: 0;
+  margin-bottom: 6px;
 }

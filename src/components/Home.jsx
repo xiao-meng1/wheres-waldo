@@ -18,10 +18,8 @@ function Home(props) {
       </section>
       <article>
         <h3>Instructions:</h3>
-        <p>
-          Click on Waldo in each of the 3 levels. Finish fast to get a high
-          score on the leaderboard!
-        </p>
+        <p>Click on Waldo and his friends in each of the 3 levels.</p>
+        <p>Finish fast to get a high score on the leaderboard!</p>
       </article>
     </div>
   );
