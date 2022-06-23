@@ -4,11 +4,19 @@ import styles from '../styles/header.module.css';
 import Waldo from '../assets/images/Waldo.jpeg';
 
 function Header(props) {
-  const { page } = props;
+  const { page, changePage } = props;
+  const handleLinkClick = (e) => {
+    changePage(e.currentTarget.dataset.linkTo);
+  };
 
   return (
     <header className={styles.header} role="navigation">
-      <button type="button" className={styles.left}>
+      <button
+        type="button"
+        onClick={handleLinkClick}
+        data-link-to="Home"
+        className={styles.left}
+      >
         <img src={Waldo} alt="Waldo" />
         <h1>
           <span className={styles.blue}>Where&apos;s </span>
@@ -18,19 +26,25 @@ function Header(props) {
       <div className={styles.right}>
         <button
           type="button"
+          onClick={handleLinkClick}
           className={page === 'Home' ? styles.active : null}
+          data-link-to="Home"
         >
           Home
         </button>
         <button
           type="button"
+          onClick={handleLinkClick}
           className={page === 'Play' ? styles.active : null}
+          data-link-to="Play"
         >
           Play
         </button>
         <button
           type="button"
+          onClick={handleLinkClick}
           className={page === 'Leaderboard' ? styles.active : null}
+          data-link-to="Leaderboard"
         >
           Leaderboard
         </button>
@@ -41,10 +55,12 @@ function Header(props) {
 
 Header.defaultProps = {
   page: '',
+  changePage: () => {},
 };
 
 Header.propTypes = {
   page: PropTypes.string,
+  changePage: PropTypes.func,
 };
 
 export default Header;
