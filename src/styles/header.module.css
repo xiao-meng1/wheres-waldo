@@ -52,6 +52,11 @@
   font-size: inherit;
 }
 
+.right > button.active {
+  text-decoration: underline;
+  text-decoration-color: lightgrey;
+}
+
 .right > button:hover {
   text-decoration: underline;
 }
