@@ -11,19 +11,16 @@ function App() {
     setPage(newPage);
   };
   const renderContent = () => {
-    let content;
-
-    if (page === 'Home') {
-      content = <Home changePage={changePage} />;
-    } else if (page === 'Play') {
-      content = <Play />;
-    } else if (page === 'Leaderboard') {
-      content = <Leaderboard />;
-    } else {
-      content = null;
+    switch (page) {
+      case 'Home':
+        return <Home changePage={changePage} />;
+      case 'Play':
+        return <Play />;
+      case 'Leaderboard':
+        return <Leaderboard />;
+      default:
+        return null;
     }
-
-    return content;
   };
 
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../styles/header.module.css';
-import Waldo from '../assets/images/Waldo.jpeg';
+import waldoIMG from '../assets/images/Waldo.jpeg';
 
 function Header(props) {
   const { page, changePage } = props;
@@ -17,7 +17,7 @@ function Header(props) {
         data-link-to="Home"
         className={styles.left}
       >
-        <img src={Waldo} alt="Waldo" />
+        <img src={waldoIMG} alt="Waldo" />
         <h1>
           <span className={styles.blue}>Where&apos;s </span>
           <span className={styles.red}>Waldo?</span>
