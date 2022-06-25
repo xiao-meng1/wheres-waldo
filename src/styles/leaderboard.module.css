@@ -1,0 +1,23 @@
+.container {
+  display: grid;
+  justify-items: center;
+}
+
+.container > h2 {
+  font-size: 30px;
+}
+
+.container > table {
+  font-size: 20px;
+  width: 800px;
+  text-align: center;
+  border-collapse: collapse; 
+}
+
+.container tr {
+  border-bottom: solid lightgray 2px;
+}
+
+.container th, .container td {
+  padding: 8px;
+}
