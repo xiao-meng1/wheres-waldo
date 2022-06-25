@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import styles from '../styles/selector.module.css';
 
 function Selector(props) {
-  const { characters, position } = props;
-  console.log(position);
+  const { characters, position, setSelectorActive } = props;
+  const handleButtonClick = (e) => {
+    setSelectorActive(false);
+    e.stopPropagation();
+  };
 
   return (
     <div
@@ -12,10 +15,15 @@ function Selector(props) {
       style={{ top: `${position[1]}px`, left: `${position[0]}px` }}
     >
       {characters.map((character) => (
-        <div className={styles.character} key={character.name}>
+        <button
+          type="button"
+          className={styles.character}
+          key={character.name}
+          onClick={handleButtonClick}
+        >
           <img src={character.src} alt={character.name} />
           <p>{character.name}</p>
-        </div>
+        </button>
       ))}
     </div>
   );
@@ -24,6 +32,7 @@ function Selector(props) {
 Selector.defaultProps = {
   characters: [],
   position: [],
+  setSelectorActive: () => {},
 };
 
 Selector.propTypes = {
@@ -34,6 +43,7 @@ Selector.propTypes = {
     })
   ),
   position: PropTypes.arrayOf(PropTypes.number),
+  setSelectorActive: PropTypes.func,
 };
 
 export default Selector;

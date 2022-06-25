@@ -11,7 +11,8 @@ import levelTwoIMG from '../assets/images/Level2.jpg';
 import levelThreeIMG from '../assets/images/Level3.jpg';
 
 function Play() {
-  const [level] = useState(3);
+  const [level, setLevel] = useState(1);
+  const [selectorActive, setSelectorActive] = useState(false);
   const [selectorPosition, setSelectorPosition] = useState([0, 0]);
   const [levelOver] = useState(true);
   const [gameOver] = useState(false);
@@ -50,11 +51,20 @@ function Play() {
     const bounds = e.target.getBoundingClientRect();
     const xPosition = e.clientX - bounds.left;
     const yPosition = e.clientY - bounds.top;
+    setSelectorActive(true);
     setSelectorPosition([xPosition, yPosition]);
+    e.stopPropagation();
   };
 
   return (
-    <section className={styles.container}>
+    <section
+      className={styles.container}
+      onClick={() => {
+        setSelectorActive(false);
+      }}
+      role="button"
+      tabIndex={0}
+    >
       <header>
         <div className={styles.portraits}>
           {getCharacters().map((character) => (
@@ -65,14 +75,29 @@ function Play() {
           ))}
         </div>
         <h2>Level {level}</h2>
-        {levelOver ? <button type="button">Next Level</button> : null}
+        {levelOver ? (
+          <button
+            type="button"
+            onClick={() => {
+              setLevel(level + 1);
+            }}
+          >
+            Next Level
+          </button>
+        ) : null}
       </header>
       <map name="game-map" onClick={handleMapClick} role="button" tabIndex={0}>
         <area shape="default" alt="default" />
       </map>
       <div className={styles['image-container']}>
         {getMapImage()}
-        <Selector characters={getCharacters()} position={selectorPosition} />
+        {selectorActive ? (
+          <Selector
+            characters={getCharacters()}
+            position={selectorPosition}
+            setSelectorActive={setSelectorActive}
+          />
+        ) : null}
       </div>
       {gameOver ? <Popup /> : null}
     </section>
