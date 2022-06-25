@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Selector from './Selector';
 import Popup from './Popup';
 import styles from '../styles/play.module.css';
@@ -14,8 +14,12 @@ function Play() {
   const [level, setLevel] = useState(1);
   const [selectorActive, setSelectorActive] = useState(false);
   const [selectorPosition, setSelectorPosition] = useState([0, 0]);
+  const [levelActive, setLevelActive] = useState(false);
   const [levelOver] = useState(true);
   const [gameOver] = useState(false);
+  const [levelStartTimestamps, setLevelStartTimestamps] = useState([]);
+  const [levelEndTimestamps, setLevelEndTimestamps] = useState([]);
+  const isFirstRender = useRef(true);
   const getCharacters = () => {
     switch (level) {
       case 1:
@@ -38,11 +42,38 @@ function Play() {
   const getMapImage = () => {
     switch (level) {
       case 1:
-        return <img src={levelOneIMG} alt="Level One" useMap="#game-map" />;
+        return (
+          <img
+            src={levelOneIMG}
+            alt="Level One"
+            useMap="#game-map"
+            onLoad={() => {
+              setLevelActive(true);
+            }}
+          />
+        );
       case 2:
-        return <img src={levelTwoIMG} alt="Level Two" useMap="#game-map" />;
+        return (
+          <img
+            src={levelTwoIMG}
+            alt="Level Two"
+            useMap="#game-map"
+            onLoad={() => {
+              setLevelActive(true);
+            }}
+          />
+        );
       case 3:
-        return <img src={levelThreeIMG} alt="Level Three" useMap="#game-map" />;
+        return (
+          <img
+            src={levelThreeIMG}
+            alt="Level Three"
+            useMap="#game-map"
+            onLoad={() => {
+              setLevelActive(true);
+            }}
+          />
+        );
       default:
         return null;
     }
@@ -55,6 +86,24 @@ function Play() {
     setSelectorPosition([xPosition, yPosition]);
     e.stopPropagation();
   };
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+
+      return;
+    }
+
+    if (levelActive) {
+      setLevelStartTimestamps((state) => [...state, Date.now()]);
+      console.log('start level');
+    } else {
+      setLevelEndTimestamps((state) => [...state, Date.now()]);
+      console.log('end level');
+    }
+    console.log(levelStartTimestamps);
+    console.log(levelEndTimestamps);
+  }, [levelActive]);
 
   return (
     <section
