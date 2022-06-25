@@ -1,0 +1,45 @@
+.container {
+  position: absolute;
+  top: 0%;
+  left: 0;
+  border: solid black 2px;
+  border-radius: 6px;
+  background-color: white;
+}
+
+.character {
+  position: relative;
+  display: grid;
+  grid-template-columns: 40px auto;
+  align-items: center;
+  border-bottom: solid black 2px;
+  padding: 4px 8px;
+}
+
+.character::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0;
+}
+
+.character:hover::after {
+  opacity: 0.1;
+}
+
+.character:last-child {
+  border: none;
+}
+
+.character > img {
+  height: 30px;
+}
+
+.character > p {
+  font-size: 20px;
+  margin: 0;
+}
