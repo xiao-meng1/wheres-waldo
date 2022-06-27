@@ -2,7 +2,7 @@
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-rows: auto auto 1fr;
+  grid-template-rows: auto 1fr;
   justify-content: center;
   position: relative;
 }
@@ -12,7 +12,8 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  padding: 2px 0;
+  height: 44px;
+  margin: 2px 0;
 }
 
 .portraits {

@@ -1,4 +1,6 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+
 import React, { useEffect, useState, useRef } from 'react';
 import Selector from './Selector';
 import Popup from './Popup';
@@ -9,35 +11,34 @@ import wizardPortraitIMG from '../assets/images/WizardPortrait.jpeg';
 import levelOneIMG from '../assets/images/Level1.jpg';
 import levelTwoIMG from '../assets/images/Level2.jpg';
 import levelThreeIMG from '../assets/images/Level3.jpg';
+import characterLocations from '../data/characterLocations.json';
 
 function Play() {
   const [level, setLevel] = useState(1);
+  const [activeCharacters, setActiveCharacters] = useState([]);
   const [selectorActive, setSelectorActive] = useState(false);
   const [selectorPosition, setSelectorPosition] = useState([0, 0]);
   const [levelActive, setLevelActive] = useState(false);
-  const [levelOver] = useState(true);
-  const [gameOver] = useState(false);
+  const [levelOver, setLevelOver] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
   const [levelStartTimestamps, setLevelStartTimestamps] = useState([]);
   const [levelEndTimestamps, setLevelEndTimestamps] = useState([]);
   const isFirstRender = useRef(true);
-  const getCharacters = () => {
-    switch (level) {
-      case 1:
-        return [{ name: 'Waldo', src: waldoPortraitIMG }];
-      case 2:
-        return [
-          { name: 'Waldo', src: waldoPortraitIMG },
-          { name: 'Odlaw', src: odlawPortraitIMG },
-        ];
-      case 3:
-        return [
-          { name: 'Waldo', src: waldoPortraitIMG },
-          { name: 'Odlaw', src: odlawPortraitIMG },
-          { name: 'Wizard', src: wizardPortraitIMG },
-        ];
-      default:
-        return null;
-    }
+
+  const handleMapClick = (e) => {
+    const bounds = e.target.getBoundingClientRect();
+    const xPosition = e.clientX - bounds.left;
+    const xPositionRelative =
+      (e.clientX - bounds.left) / (bounds.right - bounds.left);
+    const yPosition = e.clientY - bounds.top;
+    const yPositionRelative =
+      (e.clientY - bounds.top) / (bounds.bottom - bounds.top);
+    setSelectorActive(true);
+    setSelectorPosition([
+      [xPosition, xPositionRelative],
+      [yPosition, yPositionRelative],
+    ]);
+    e.stopPropagation();
   };
   const getMapImage = () => {
     switch (level) {
@@ -47,6 +48,7 @@ function Play() {
             src={levelOneIMG}
             alt="Level One"
             useMap="#game-map"
+            onClick={handleMapClick}
             onLoad={() => {
               setLevelActive(true);
             }}
@@ -58,6 +60,7 @@ function Play() {
             src={levelTwoIMG}
             alt="Level Two"
             useMap="#game-map"
+            onClick={handleMapClick}
             onLoad={() => {
               setLevelActive(true);
             }}
@@ -69,6 +72,7 @@ function Play() {
             src={levelThreeIMG}
             alt="Level Three"
             useMap="#game-map"
+            onClick={handleMapClick}
             onLoad={() => {
               setLevelActive(true);
             }}
@@ -78,14 +82,61 @@ function Play() {
         return null;
     }
   };
-  const handleMapClick = (e) => {
-    const bounds = e.target.getBoundingClientRect();
-    const xPosition = e.clientX - bounds.left;
-    const yPosition = e.clientY - bounds.top;
-    setSelectorActive(true);
-    setSelectorPosition([xPosition, yPosition]);
-    e.stopPropagation();
+  const handleGuess = (characterName, xLocationRelative, yLocationRelative) => {
+    const levelData = characterLocations.find((data) => data.level === level);
+    const characterData = levelData.characters[characterName];
+    const guessCorrect =
+      xLocationRelative > characterData.xMinRelative &&
+      xLocationRelative < characterData.xMaxRelative &&
+      yLocationRelative > characterData.yMinRelative &&
+      yLocationRelative < characterData.yMaxRelative;
+
+    if (!guessCorrect) {
+      return;
+    }
+
+    setActiveCharacters(
+      activeCharacters.filter((character) => character.name !== characterName)
+    );
+
+    if (activeCharacters.length === 1) {
+      setLevelActive(false);
+
+      if (level === 3) {
+        setGameOver(true);
+
+        return;
+      }
+
+      setLevelOver(true);
+    }
   };
+  const handleNextLevelButton = () => {
+    setLevelOver(false);
+    setLevel(level + 1);
+  };
+
+  useEffect(() => {
+    switch (level) {
+      case 1:
+        setActiveCharacters([{ name: 'Waldo', src: waldoPortraitIMG }]);
+        break;
+      case 2:
+        setActiveCharacters([
+          { name: 'Waldo', src: waldoPortraitIMG },
+          { name: 'Odlaw', src: odlawPortraitIMG },
+        ]);
+        break;
+      case 3:
+        setActiveCharacters([
+          { name: 'Waldo', src: waldoPortraitIMG },
+          { name: 'Odlaw', src: odlawPortraitIMG },
+          { name: 'Wizard', src: wizardPortraitIMG },
+        ]);
+        break;
+      default:
+    }
+  }, [level]);
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -116,7 +167,7 @@ function Play() {
     >
       <header>
         <div className={styles.portraits}>
-          {getCharacters().map((character) => (
+          {activeCharacters.map((character) => (
             <article key={character.name}>
               <img src={character.src} alt={`${character.name}`} />
               <p>{`${character.name}`}</p>
@@ -125,25 +176,21 @@ function Play() {
         </div>
         <h2>Level {level}</h2>
         {levelOver ? (
-          <button
-            type="button"
-            onClick={() => {
-              setLevel(level + 1);
-            }}
-          >
+          <button type="button" onClick={handleNextLevelButton}>
             Next Level
           </button>
         ) : null}
       </header>
-      <map name="game-map" onClick={handleMapClick} role="button" tabIndex={0}>
-        <area shape="default" alt="default" />
-      </map>
       <div className={styles['image-container']}>
         {getMapImage()}
         {selectorActive ? (
           <Selector
-            characters={getCharacters()}
-            position={selectorPosition}
+            characters={activeCharacters}
+            xPosition={selectorPosition[0][0]}
+            xPositionRelative={selectorPosition[0][1]}
+            yPosition={selectorPosition[1][0]}
+            yPositionRelative={selectorPosition[1][1]}
+            handleGuess={handleGuess}
             setSelectorActive={setSelectorActive}
           />
         ) : null}

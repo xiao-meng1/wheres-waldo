@@ -9,7 +9,6 @@
 
 .container > table {
   font-size: 20px;
-  width: 800px;
   text-align: center;
   border-collapse: collapse; 
 }
@@ -20,4 +19,5 @@
 
 .container th, .container td {
   padding: 8px;
+  width: 500px;
 }

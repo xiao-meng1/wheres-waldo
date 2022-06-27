@@ -3,8 +3,19 @@ import PropTypes from 'prop-types';
 import styles from '../styles/selector.module.css';
 
 function Selector(props) {
-  const { characters, position, setSelectorActive } = props;
+  const {
+    characters,
+    xPosition,
+    xPositionRelative,
+    yPosition,
+    yPositionRelative,
+    handleGuess,
+    setSelectorActive,
+  } = props;
   const handleButtonClick = (e) => {
+    const characterName = e.currentTarget.id;
+
+    handleGuess(characterName, xPositionRelative, yPositionRelative);
     setSelectorActive(false);
     e.stopPropagation();
   };
@@ -12,12 +23,13 @@ function Selector(props) {
   return (
     <div
       className={styles.container}
-      style={{ top: `${position[1]}px`, left: `${position[0]}px` }}
+      style={{ top: `${yPosition}px`, left: `${xPosition}px` }}
     >
       {characters.map((character) => (
         <button
           type="button"
           className={styles.character}
+          id={character.name}
           key={character.name}
           onClick={handleButtonClick}
         >
@@ -31,7 +43,11 @@ function Selector(props) {
 
 Selector.defaultProps = {
   characters: [],
-  position: [],
+  xPosition: 0,
+  xPositionRelative: 0,
+  yPosition: 0,
+  yPositionRelative: 0,
+  handleGuess: () => {},
   setSelectorActive: () => {},
 };
 
@@ -42,7 +58,11 @@ Selector.propTypes = {
       image: PropTypes.string,
     })
   ),
-  position: PropTypes.arrayOf(PropTypes.number),
+  xPosition: PropTypes.number,
+  xPositionRelative: PropTypes.number,
+  yPosition: PropTypes.number,
+  yPositionRelative: PropTypes.number,
+  handleGuess: PropTypes.func,
   setSelectorActive: PropTypes.func,
 };
 

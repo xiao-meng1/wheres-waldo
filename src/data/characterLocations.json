@@ -1,0 +1,53 @@
+[
+  {
+    "level": 1,
+    "characters": {
+      "Waldo": {
+        "xMinRelative": 0.64,
+        "xMaxRelative": 0.7,
+        "yMinRelative": 0.71,
+        "yMaxRelative": 0.98
+      }
+    }
+  },
+  {
+    "level": 2,
+    "characters": {
+      "Waldo": {
+        "xMinRelative": 0.785,
+        "xMaxRelative": 0.815,
+        "yMinRelative": 0.07,
+        "yMaxRelative": 0.13
+      },
+      "Odlaw": {
+        "xMinRelative": 0.03,
+        "xMaxRelative": 0.06,
+        "yMinRelative": 0.73,
+        "yMaxRelative": 0.8
+      }
+    }
+  },
+  {
+    "level": 3,
+    "characters": {
+      "Waldo": {
+        "xMinRelative": 0.51,
+        "xMaxRelative": 0.55,
+        "yMinRelative": 0.46,
+        "yMaxRelative": 0.565
+      },
+      "Odlaw": {
+        "xMinRelative": 0.23,
+        "xMaxRelative": 0.26,
+        "yMinRelative": 0.46,
+        "yMaxRelative": 0.57
+      },
+      "Wizard": {
+        "xMinRelative": 0.605,
+        "xMaxRelative": 0.64,
+        "yMinRelative": 0.46,
+        "yMaxRelative": 0.55
+      }
+    }
+  }
+]
