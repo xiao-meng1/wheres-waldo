@@ -1,36 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getUserTimeResults } from '../firebase/firebase';
 import styles from '../styles/leaderboard.module.css';
 
 function Leaderboard() {
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [resultsData, setResultsData] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const newData = await getUserTimeResults();
+      setResultsData(newData);
+      setIsDataLoaded(true);
+    })();
+  }, []);
+
   return (
     <section className={styles.container}>
       <h2>Leaderboard</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Time &#40;seconds&#41;</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>John</td>
-            <td>93.2</td>
-          </tr>
-          <tr>
-            <td>John</td>
-            <td>93.2</td>
-          </tr>
-          <tr>
-            <td>John</td>
-            <td>93.2</td>
-          </tr>
-          <tr>
-            <td>John</td>
-            <td>93.2</td>
-          </tr>
-        </tbody>
-      </table>
+      {isDataLoaded ? (
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Time &#40;seconds&#41;</th>
+            </tr>
+          </thead>
+          <tbody>
+            {resultsData.map((data) => (
+              <tr key={data.id}>
+                <td>{data.name}</td>
+                <td>{data.time}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p>Loading...</p>
+      )}
     </section>
   );
 }

@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 
 import React, { useEffect, useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 import Selector from './Selector';
 import Popup from './Popup';
 import styles from '../styles/play.module.css';
@@ -13,7 +14,8 @@ import levelTwoIMG from '../assets/images/Level2.jpg';
 import levelThreeIMG from '../assets/images/Level3.jpg';
 import characterLocations from '../data/characterLocations.json';
 
-function Play() {
+function Play(props) {
+  const { changePage } = props;
   const [level, setLevel] = useState(1);
   const [activeCharacters, setActiveCharacters] = useState([]);
   const [selectorActive, setSelectorActive] = useState(false);
@@ -115,6 +117,15 @@ function Play() {
     setLevelOver(false);
     setLevel(level + 1);
   };
+  const getTotalTime = () => {
+    let totalTime = 0;
+
+    for (let i = 0; i < levelStartTimestamps.length; i += 1) {
+      totalTime += (levelEndTimestamps[i] - levelStartTimestamps[i]) / 1000;
+    }
+
+    return Number.parseFloat(totalTime.toFixed(1));
+  };
 
   useEffect(() => {
     switch (level) {
@@ -147,13 +158,9 @@ function Play() {
 
     if (levelActive) {
       setLevelStartTimestamps((state) => [...state, Date.now()]);
-      console.log('start level');
     } else {
       setLevelEndTimestamps((state) => [...state, Date.now()]);
-      console.log('end level');
     }
-    console.log(levelStartTimestamps);
-    console.log(levelEndTimestamps);
   }, [levelActive]);
 
   return (
@@ -195,9 +202,19 @@ function Play() {
           />
         ) : null}
       </div>
-      {gameOver ? <Popup /> : null}
+      {gameOver ? (
+        <Popup totalTime={getTotalTime()} changePage={changePage} />
+      ) : null}
     </section>
   );
 }
+
+Play.defaultProps = {
+  changePage: () => {},
+};
+
+Play.propTypes = {
+  changePage: PropTypes.func,
+};
 
 export default Play;

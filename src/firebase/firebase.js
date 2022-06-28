@@ -1,4 +1,12 @@
 import { initializeApp } from 'firebase/app';
+import {
+  getFirestore,
+  collection,
+  query,
+  orderBy,
+  addDoc,
+  getDocs,
+} from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCJq58SHe_5G16tXb1RjSfqGlCSTcrAyHc',
@@ -10,5 +18,25 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-export default app;
+const addUserTimeResult = async (name, time) => {
+  addDoc(collection(db, 'userTimeResults'), {
+    name,
+    time,
+  });
+};
+
+const getUserTimeResults = async () => {
+  const q = query(collection(db, 'userTimeResults'), orderBy('time', 'asc'));
+  const querySnapshot = await getDocs(q);
+  const data = querySnapshot.docs.map((doc) => ({
+    id: doc.id,
+    name: doc.data().name,
+    time: doc.data().time,
+  }));
+
+  return data;
+};
+
+export { addUserTimeResult, getUserTimeResults };

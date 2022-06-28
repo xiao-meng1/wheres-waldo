@@ -15,7 +15,7 @@ function App() {
       case 'Home':
         return <Home changePage={changePage} />;
       case 'Play':
-        return <Play />;
+        return <Play changePage={changePage} />;
       case 'Leaderboard':
         return <Leaderboard />;
       default:

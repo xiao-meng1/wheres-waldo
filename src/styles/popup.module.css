@@ -23,7 +23,7 @@
   text-align: center;
 }
 
-.popup > input {
+.popup input {
   width: 240px;
   margin-top: 10px;
   font-size: 24px;
@@ -32,6 +32,21 @@
   border-bottom: solid black 2px;
   outline: none;
   text-align: center;
+}
+
+.popup button {
+  margin-left: 16px;
+  font-size: 20px;
+  padding: 6px 18px;
+  text-decoration: none;
+  color: white;
+  background-color: var(--color-red);
+  border: none;
+  border-radius: 20px;
+}
+
+.popup button:hover {
+  opacity: 0.9;
 }
 
 .blocker {
