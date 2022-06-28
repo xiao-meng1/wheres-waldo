@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e94914a8.css",
+    "main.js": "/static/js/main.76bcf8f6.js",
+    "static/media/Level2.jpg": "/static/media/Level2.3e3e1cd7e2a1856d607d.jpg",
+    "static/media/Level1.jpg": "/static/media/Level1.d1ac32011657f2af18da.jpg",
+    "static/media/Level3.jpg": "/static/media/Level3.8b871ac1382de68197ba.jpg",
+    "static/media/Waldo.jpeg": "/static/media/Waldo.af8e5cac63dc94829842.jpeg",
+    "static/media/WaldoPortrait.jpg": "/static/media/WaldoPortrait.1e2ee91f0cfa0ceeb550.jpg",
+    "static/media/OdlawPortrait.jpg": "/static/media/OdlawPortrait.f34b5260e086e9e07982.jpg",
+    "index.html": "/index.html",
+    "main.e94914a8.css.map": "/static/css/main.e94914a8.css.map",
+    "main.76bcf8f6.js.map": "/static/js/main.76bcf8f6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e94914a8.css",
+    "static/js/main.76bcf8f6.js"
+  ]
+}
