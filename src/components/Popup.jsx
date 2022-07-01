@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import { addUserTimeResult } from '../firebase/firebase';
 import styles from '../styles/popup.module.css';
 
 function Popup(props) {
-  const { totalTime, changePage } = props;
+  const { totalTime } = props;
   const [inputValue, setInputValue] = useState('');
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     addUserTimeResult(inputValue, totalTime);
-    changePage('Leaderboard');
+    navigate('../leaderboard');
   };
 
   return (
@@ -38,12 +40,10 @@ function Popup(props) {
 
 Popup.defaultProps = {
   totalTime: 0,
-  changePage: () => {},
 };
 
 Popup.propTypes = {
   totalTime: PropTypes.number,
-  changePage: PropTypes.func,
 };
 
 export default Popup;

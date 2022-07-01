@@ -1,30 +1,49 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Link, NavLink } from 'react-router-dom';
 import styles from '../styles/header.module.css';
 import waldoIMG from '../assets/images/Waldo.jpeg';
 
-function Header(props) {
-  const { page, changePage } = props;
-  const handleLinkClick = (e) => {
-    changePage(e.currentTarget.dataset.linkTo);
-  };
+function Header() {
+  // const handleLinkClick = (e) => {
+  //   changePage(e.currentTarget.dataset.linkTo);
+  // };
 
   return (
     <header className={styles.header} role="navigation">
-      <button
-        type="button"
-        onClick={handleLinkClick}
-        data-link-to="Home"
-        className={styles.left}
-      >
+      <Link to="/" className={styles.left}>
         <img src={waldoIMG} alt="Waldo" />
         <h1>
           <span className={styles.blue}>Where&apos;s </span>
           <span className={styles.red}>Waldo?</span>
         </h1>
-      </button>
-      <div className={styles.right}>
-        <button
+      </Link>
+      <ul className={styles.right}>
+        <li key="Home">
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? styles.active : undefined)}
+          >
+            Home
+          </NavLink>
+        </li>
+        <li key="Play">
+          <NavLink
+            to="play"
+            className={({ isActive }) => (isActive ? styles.active : undefined)}
+          >
+            Play
+          </NavLink>
+        </li>
+        <li key="Leaderboard">
+          <NavLink
+            to="leaderboard"
+            className={({ isActive }) => (isActive ? styles.active : undefined)}
+          >
+            Leaderboard
+          </NavLink>
+        </li>
+
+        {/* <button
           type="button"
           onClick={handleLinkClick}
           className={page === 'Home' ? styles.active : null}
@@ -47,20 +66,10 @@ function Header(props) {
           data-link-to="Leaderboard"
         >
           Leaderboard
-        </button>
-      </div>
+        </button> */}
+      </ul>
     </header>
   );
 }
-
-Header.defaultProps = {
-  page: '',
-  changePage: () => {},
-};
-
-Header.propTypes = {
-  page: PropTypes.string,
-  changePage: PropTypes.func,
-};
 
 export default Header;

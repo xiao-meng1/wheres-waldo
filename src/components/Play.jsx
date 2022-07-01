@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 
 import React, { useEffect, useState, useRef } from 'react';
-import PropTypes from 'prop-types';
 import Selector from './Selector';
 import Popup from './Popup';
 import styles from '../styles/play.module.css';
@@ -14,8 +13,7 @@ import levelTwoIMG from '../assets/images/Level2.jpg';
 import levelThreeIMG from '../assets/images/Level3.jpg';
 import characterLocations from '../data/characterLocations.json';
 
-function Play(props) {
-  const { changePage } = props;
+function Play() {
   const [level, setLevel] = useState(1);
   const [activeCharacters, setActiveCharacters] = useState([]);
   const [selectorActive, setSelectorActive] = useState(false);
@@ -202,19 +200,9 @@ function Play(props) {
           />
         ) : null}
       </div>
-      {gameOver ? (
-        <Popup totalTime={getTotalTime()} changePage={changePage} />
-      ) : null}
+      {gameOver ? <Popup totalTime={getTotalTime()} /> : null}
     </section>
   );
 }
-
-Play.defaultProps = {
-  changePage: () => {},
-};
-
-Play.propTypes = {
-  changePage: PropTypes.func,
-};
 
 export default Play;

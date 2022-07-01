@@ -1,20 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import styles from '../styles/home.module.css';
 
-function Home(props) {
-  const { changePage } = props;
-  const handleLinkClick = () => {
-    changePage('Play');
-  };
-
+function Home() {
   return (
     <div className={styles.container}>
       <section>
         <h2>Are you a Waldo expert?</h2>
-        <button type="button" onClick={handleLinkClick}>
-          Play now
-        </button>
+        <Link to="play">Play now</Link>
       </section>
       <article>
         <h3>Instructions:</h3>
@@ -24,13 +17,5 @@ function Home(props) {
     </div>
   );
 }
-
-Home.defaultProps = {
-  changePage: () => {},
-};
-
-Home.propTypes = {
-  changePage: PropTypes.func,
-};
 
 export default Home;

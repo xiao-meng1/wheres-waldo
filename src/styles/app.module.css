@@ -1,12 +1,16 @@
-.app {
-  min-height: 100vh;
-  display: grid;
-  grid-template-rows: auto 1fr;
-}
-
-.app > main {
+.main {
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+}
+
+a, a:visited, a:hover, a:active {
+  text-decoration: none;
+  color: inherit;
 }

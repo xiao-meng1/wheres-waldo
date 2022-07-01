@@ -20,7 +20,7 @@
   text-align: center;
 }
 
-.container > section > button {
+.container > section > a {
   font-size: 30px;
   font-weight: 900;
   padding: 20px 60px;
@@ -31,7 +31,7 @@
   border-radius: 100px;
 }
 
-.container > section > button:hover {
+.container > section > a:hover {
   opacity: 0.9;
 }
 
