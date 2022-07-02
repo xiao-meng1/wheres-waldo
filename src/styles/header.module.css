@@ -34,6 +34,9 @@
 
 .right {
   justify-self: end;
+}
+
+.right > ul {
   display: flex;
   align-items: center;
   gap: 50px;
