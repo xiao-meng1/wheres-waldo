@@ -1,14 +1,19 @@
 .header {
-  display: grid;
-  grid-auto-flow: column;
-  padding: 10px 80px;
   background-color: inherit;
   color: black;
   border-bottom: solid whitesmoke 4px;
+  padding: 10px 80px;
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
 }
 
 .left {
-  justify-self: start;
   display: flex;
   align-items: center;
   gap: 30px;
@@ -30,10 +35,6 @@
 
 .left > h1 > .red {
   color: var(--color-red);
-}
-
-.right {
-  justify-self: end;
 }
 
 .right > ul {
