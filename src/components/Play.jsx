@@ -13,7 +13,7 @@ import levelTwoIMG from '../assets/images/Level2.jpg';
 import levelThreeIMG from '../assets/images/Level3.jpg';
 import characterLocations from '../data/characterLocations.json';
 
-function Play() {
+export default function Play() {
   const [level, setLevel] = useState(1);
   const [activeCharacters, setActiveCharacters] = useState([]);
   const [selectorActive, setSelectorActive] = useState(false);
@@ -204,5 +204,3 @@ function Play() {
     </section>
   );
 }
-
-export default Play;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../styles/selector.module.css';
 
-function Selector(props) {
+export default function Selector(props) {
   const {
     characters,
     xPosition,
@@ -65,5 +65,3 @@ Selector.propTypes = {
   handleGuess: PropTypes.func,
   setSelectorActive: PropTypes.func,
 };
-
-export default Selector;

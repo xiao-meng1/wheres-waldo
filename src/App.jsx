@@ -7,29 +7,7 @@ import Play from './components/Play';
 import Leaderboard from './components/Leaderboard';
 import styles from './styles/app.module.css';
 
-function App() {
-  // const [page, setPage] = useState('Home');
-  // const changePage = (newPage) => {
-  //   setPage(newPage);
-  // };
-  // const renderContent = () => {
-  //   switch (page) {
-  //     case 'Home':
-  //       return <Home changePage={changePage} />;
-  //     case 'Play':
-  //       return <Play changePage={changePage} />;
-  //     case 'Leaderboard':
-  //       return <Leaderboard />;
-  //     default:
-  //       return null;
-  //   }
-  // };
-
-  /* <div className={styles.app}>
-      <Header page={page} changePage={changePage} />
-      <main>{renderContent()}</main>
-    </div> */
-
+export default function App() {
   return (
     <BrowserRouter>
       <Header />
@@ -46,5 +24,3 @@ function App() {
     </BrowserRouter>
   );
 }
-
-export default App;

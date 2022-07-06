@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import styles from '../styles/header.module.css';
 import waldoIMG from '../assets/images/Waldo.jpeg';
 
-function Header() {
+export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -52,5 +52,3 @@ function Header() {
     </header>
   );
 }
-
-export default Header;

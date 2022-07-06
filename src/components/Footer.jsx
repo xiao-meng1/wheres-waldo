@@ -1,11 +1,5 @@
 import React from 'react';
 
-function Footer() {
-  // const handleLinkClick = (e) => {
-  //   changePage(e.currentTarget.dataset.linkTo);
-  // };
-
+export default function Footer() {
   return <footer style={{ height: '30px' }} />;
 }
-
-export default Footer;

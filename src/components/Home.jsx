@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../styles/home.module.css';
 
-function Home() {
+export default function Home() {
   return (
     <div className={styles.container}>
       <section>
@@ -17,5 +17,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home;

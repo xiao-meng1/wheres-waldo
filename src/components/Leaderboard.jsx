@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getUserTimeResults } from '../firebase/firebase';
 import styles from '../styles/leaderboard.module.css';
 
-function Leaderboard() {
+export default function Leaderboard() {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [resultsData, setResultsData] = useState([]);
 
@@ -40,5 +40,3 @@ function Leaderboard() {
     </section>
   );
 }
-
-export default Leaderboard;
