@@ -1,6 +1,7 @@
 .container {
   display: grid;
   justify-items: center;
+  margin: 0 30px;
 }
 
 .container > h2 {
